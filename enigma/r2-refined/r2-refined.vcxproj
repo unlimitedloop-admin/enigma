@@ -74,6 +74,12 @@
     <Import Project="cpp-project.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <TargetName>$(ProjectName)(x86)</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <TargetName>$(ProjectName)(x86)</TargetName>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -151,10 +157,20 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="api_entry.cpp" />
+    <None Include="cpp-project.props" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="cpp-project.props" />
+    <ClCompile Include="src\api_entry.cpp" />
+    <ClCompile Include="src\forms\boot\kernel.cpp" />
+    <ClCompile Include="src\forms\terminal\app_engine.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="src\forms\boot\kernel.h" />
+    <ClInclude Include="src\forms\terminal\app_engine.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="r2-refined.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
