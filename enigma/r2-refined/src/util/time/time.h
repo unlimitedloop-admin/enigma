@@ -13,7 +13,7 @@
 //
 //      [enigma] r2-refined project
 //
-//      File name       : app_engine.h
+//      File name       : time.h
 //
 //      Author          : u7
 //
@@ -22,22 +22,21 @@
 //
 // *************************************************************
 
-#ifndef _R2REFINED_FORMS_TERMINAL_APPENGINE_H_
-#define _R2REFINED_FORMS_TERMINAL_APPENGINE_H_
+#ifndef _R2REFINED_UTIL_TIME_TIME_H_
+#define _R2REFINED_UTIL_TIME_TIME_H_
 
-namespace terminal {
+#include <string>
 
-    class AppEngine final {
-    public:
-        AppEngine() {}
-        AppEngine(const AppEngine&) = delete;
-        ~AppEngine() {}
 
-        bool initialize();
-        bool eventLoop();
-        void finalize();
-    };
+
+namespace util_time {
+
+    /// <summary>
+    ///  Gets the current time string down to milliseconds.
+    /// </summary>
+    /// <returns>Time information.</returns>
+    std::wstring getCurrentTimeWithMilliseconds();
 
 }
 
-#endif // !_R2REFINED_FORMS_TERMINAL_APPENGINE_H_
+#endif // !_R2REFINED_UTIL_TIME_TIME_H_
