@@ -2,6 +2,7 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <None Include="cpp-project.props" />
+    <None Include=".env" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\api_entry.cpp" />
@@ -11,6 +12,7 @@
     <ClCompile Include="src\util\conv\converting.cpp" />
     <ClCompile Include="src\static\log_file_manager.cpp" />
     <ClCompile Include="src\util\time\time.cpp" />
+    <ClCompile Include="src\forms\config\env_manager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\forms\boot\kernel.h" />
@@ -20,6 +22,8 @@
     <ClInclude Include="src\util\conv\converting.h" />
     <ClInclude Include="src\static\log_file_manager.h" />
     <ClInclude Include="src\util\time\time.h" />
+    <ClInclude Include="src\forms\config\env_manager.h" />
+    <ClInclude Include="src\static\evaluations.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="r2-refined.rc" />

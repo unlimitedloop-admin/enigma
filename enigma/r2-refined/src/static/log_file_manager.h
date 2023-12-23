@@ -17,7 +17,7 @@
 //
 //      Author          : u7
 //
-//      Last update     : 2023/12/16
+//      Last update     : 2023/12/23
 //
 //
 // *************************************************************
@@ -35,6 +35,13 @@ namespace _static {
     ///  Generate and manage log file names.
     /// </summary>
     class LogFileManager final {
+    public:
+        /// <summary>
+        ///  Get the log file name of a Singleton instance.
+        /// </summary>
+        /// <returns>Log file name.</returns>
+        static const std::wstring& GetLogFileName();
+
     private:
         std::wstring _logFileName;
         
@@ -43,13 +50,6 @@ namespace _static {
         LogFileManager& operator=(const LogFileManager&) = delete;
         LogFileManager(LogFileManager&&) = delete;
         LogFileManager& operator=(LogFileManager&&) = delete;
-
-    public:
-        /// <summary>
-        ///  Get the log file name of a Singleton instance.
-        /// </summary>
-        /// <returns>Log file name.</returns>
-        static const std::wstring& GetLogFileName();
     };
 
 }

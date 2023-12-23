@@ -13,7 +13,7 @@
 //
 //      [enigma] r2-refined project
 //
-//      File name       : kernel.h
+//      File name       : evaluations.h
 //
 //      Author          : u7
 //
@@ -22,27 +22,29 @@
 //
 // *************************************************************
 
-#ifndef _R2REFINED_FORMS_BOOT_KERNEL_H_
-#define _R2REFINED_FORMS_BOOT_KERNEL_H_
+#ifndef _R2REFINED_STATIC_EVALUATIONS_H_
+#define _R2REFINED_STATIC_EVALUATIONS_H_
 
-#include <Windows.h>
-#include "src/forms/terminal/app_engine.h"
+namespace _static {
 
-
-
-namespace boot {
-
-    class EngineFinalizer {
-    public:
-        EngineFinalizer(terminal::AppEngine& engine) : _engine(engine) {}
-        ~EngineFinalizer() { _engine.finalize(); }
-
-    private:
-        terminal::AppEngine& _engine;
+    enum class Evaluate {
+        DISABLED = -1,
+        ENABLED
     };
 
-    bool systems(LPTSTR cmdline);
+
+    enum class ResultSet {
+        PROC_FAILED = -1,
+        PROC_SUCCEED,
+        PROC_QUIT
+    };
+
+
+    enum class RunMode {
+        DEFAULT_MODE,
+        DEBUG_MODE
+    };
 
 }
 
-#endif // !_R2REFINED_FORMS_BOOT_KERNEL_H_
+#endif // !_R2REFINED_STATIC_EVALUATIONS_H_
