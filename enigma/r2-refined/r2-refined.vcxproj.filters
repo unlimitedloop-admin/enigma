@@ -13,6 +13,7 @@
     <ClCompile Include="src\static\log_file_manager.cpp" />
     <ClCompile Include="src\util\time\time.cpp" />
     <ClCompile Include="src\forms\config\env_manager.cpp" />
+    <ClCompile Include="src\forms\inputkey\keyboards_in.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\forms\boot\kernel.h" />
@@ -24,6 +25,7 @@
     <ClInclude Include="src\util\time\time.h" />
     <ClInclude Include="src\forms\config\env_manager.h" />
     <ClInclude Include="src\static\evaluations.h" />
+    <ClInclude Include="src\forms\inputkey\keyboards_in.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="r2-refined.rc" />

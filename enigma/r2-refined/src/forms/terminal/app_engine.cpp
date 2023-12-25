@@ -17,15 +17,17 @@
 //
 //      Author          : u7
 //
-//      Last update     : 2023/12/23
+//      Last update     : 2023/12/25
 //
 //
 // *************************************************************
 
 #include "app_engine.h"
+#include <string>
 #include <DxLib.h>
 #include "src/exceptions/error_handler.h"
 #include "src/forms/config/env_manager.h"
+#include "src/forms/inputkey/keyboards_in.h"
 #include "src/static/evaluations.h"
 #include "src/static/log_file_manager.h"
 #include "src/util/time/time.h"
@@ -55,6 +57,7 @@ namespace terminal {
 
         DxLib::DxLib_Init();
         if (DxLib::DxLib_IsInit()) {
+            DxLib::SetDrawScreen(DX_SCREEN_BACK);
             return true;
         }
         return false;
@@ -62,11 +65,15 @@ namespace terminal {
 
 
     bool AppEngine::eventLoop() {
-        return ErrorHandler::tryCatchWithLogging([]() {
-            while (!DxLib::ProcessMessage() && !DxLib::ScreenFlip() && !DxLib::ClearDrawScreen()) {
-                if (0 != DxLib::CheckHitKey(KEY_INPUT_ESCAPE)) {
+        return ErrorHandler::tryCatchWithLogging([=]() {
+            while (!DxLib::ProcessMessage() && !DxLib::ScreenFlip() && !DxLib::ClearDrawScreen() && _keyboards.updateAllStateKey()) {
+                if (0 != _keyboards.getHoldKeyValue(KEY_INPUT_ESCAPE)) {
                     break;
                 }
+                if (100 == _keyboards.getHoldKeyValue(KEY_INPUT_1)) {
+                    _test++;
+                }
+                DxLib::DrawString(0, 0, (L"1 key pressed:" + std::to_wstring(_test)).c_str(), DxLib::GetColor(255, 255, 255));
             }
         });
     }
