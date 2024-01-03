@@ -14,6 +14,12 @@
     <ClCompile Include="src\util\time\time.cpp" />
     <ClCompile Include="src\forms\config\env_manager.cpp" />
     <ClCompile Include="src\forms\inputkey\keyboards_in.cpp" />
+    <ClCompile Include="src\forms\terminal\myapp_window_procedure.cpp" />
+    <ClCompile Include="src\app\sequence\sequencer.h" />
+    <ClCompile Include="src\app\sequence\main_sequence.cpp" />
+    <ClCompile Include="src\app\input\joystick.cpp" />
+    <ClCompile Include="src\app\input\key_binding.cpp" />
+    <ClCompile Include="src\app\sequence\develop_sequence.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\forms\boot\kernel.h" />
@@ -26,6 +32,13 @@
     <ClInclude Include="src\forms\config\env_manager.h" />
     <ClInclude Include="src\static\evaluations.h" />
     <ClInclude Include="src\forms\inputkey\keyboards_in.h" />
+    <ClInclude Include="src\app\sequence\main_sequence.h" />
+    <ClInclude Include="src\app\input\joystick.h" />
+    <ClInclude Include="src\app\input\key_binding.h" />
+    <ClInclude Include="src\app\input\jpbtn.h" />
+    <ClInclude Include="src\static\configuration.h" />
+    <ClInclude Include="src\static\universal\global_object.h" />
+    <ClInclude Include="src\app\sequence\develop_sequence.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="r2-refined.rc" />

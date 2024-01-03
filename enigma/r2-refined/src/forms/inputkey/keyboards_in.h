@@ -17,7 +17,7 @@
 //
 //      Author          : u7
 //
-//      Last update     : 2023/12/25
+//      Last update     : 2024/01/03
 //
 //
 // *************************************************************
@@ -26,6 +26,7 @@
 #define _R2REFINED_FORMS_INPUTKEY_KEYBOARDSIN_H_
 
 #include <array>
+#include <cstdint>
 
 
 
@@ -41,13 +42,13 @@ namespace inputkey {
         ~KeyboardsIn() {}
 
         bool updateAllStateKey();
-        __int64 getHoldKeyValue(int keynumber);
-        __int64 getFreeKeyValue(int keynumber);
+        int64_t getHoldKeyValue(size_t keynumber);
+        int64_t getFreeKeyValue(size_t keynumber);
 
     private:
         static const size_t KEY_NUM = 256;
-        std::array<__int64, KEY_NUM> _diKeyPressed;
-        std::array<__int64, KEY_NUM> _diKeyReleased;
+        std::array<int64_t, KEY_NUM> _diKeyPressed;
+        std::array<int64_t, KEY_NUM> _diKeyReleased;
     };
 
 }

@@ -17,12 +17,13 @@
 //
 //      Author          : u7
 //
-//      Last update     : 2023/12/25
+//      Last update     : 2024/01/03
 //
 //
 // *************************************************************
 
 #include "keyboards_in.h"
+#include <cstdint>
 #include <DxLib.h>
 
 
@@ -49,13 +50,13 @@ namespace inputkey {
     }
 
 
-    __int64 KeyboardsIn::getHoldKeyValue(int keynumber)
+    int64_t KeyboardsIn::getHoldKeyValue(size_t keynumber)
     {
         return (KEY_NUM <= keynumber) ? -1 : _diKeyPressed[keynumber];
     }
 
 
-    __int64 KeyboardsIn::getFreeKeyValue(int keynumber)
+    int64_t KeyboardsIn::getFreeKeyValue(size_t keynumber)
     {
         return (KEY_NUM <= keynumber) ? -1 : _diKeyReleased[keynumber];
     }

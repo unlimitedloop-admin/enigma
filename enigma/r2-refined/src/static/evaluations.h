@@ -17,7 +17,7 @@
 //
 //      Author          : u7
 //
-//      Last update     : 2023/12/23
+//      Last update     : 2024/01/03
 //
 //
 // *************************************************************
@@ -43,6 +43,24 @@ namespace _static {
     enum class RunMode {
         DEFAULT_MODE,
         DEBUG_MODE
+    };
+
+
+    enum class Activator {
+        DISABLED = -1
+        , NOT_ACTIVATION
+        , CHANGE_MAINPROC
+        , CHANGE_DEVELOPPROC
+        , CHANGE_DRIVER
+    };
+
+
+    enum class Simulator {
+        OFF = 0
+        , MAIN_PROGRAM
+        , DEVELOPER
+        , TEST_DRIVER
+        , EMPTY = 999
     };
 
 }

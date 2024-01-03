@@ -17,7 +17,7 @@
 //
 //      Author          : u7
 //
-//      Last update     : 2023/12/25
+//      Last update     : 2024/01/03
 //
 //
 // *************************************************************
@@ -25,7 +25,9 @@
 #ifndef _R2REFINED_FORMS_TERMINAL_APPENGINE_H_
 #define _R2REFINED_FORMS_TERMINAL_APPENGINE_H_
 
-#include "src/forms/inputkey/keyboards_in.h"
+#include <Windows.h>
+#include "src/app/sequence/sequencer.h"
+#include "src/static/evaluations.h"
 
 
 
@@ -33,17 +35,26 @@ namespace terminal {
 
     class AppEngine final {
     public:
-        AppEngine() : _test(0) {}
+        AppEngine(_static::RunMode mode) : _mode(mode), _sequence(nullptr), _activator(_static::Activator::DISABLED) {}
         AppEngine(const AppEngine&) = delete;
+        AppEngine& operator=(const AppEngine&) = delete;
         ~AppEngine() {}
+
+        static HWND HWnd;
+        static WNDPROC DxLibWnd;
+        static LRESULT CALLBACK definitiveProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
 
         bool initialize();
         bool eventLoop();
         void finalize();
 
     private:
-        inputkey::KeyboardsIn _keyboards;
-        int _test;
+        _static::RunMode _mode;
+        _static::Activator _activator;
+        app::sequence::ISequencer* _sequence;
+
+        void setAppsActiveFlag(bool, bool = false);
+        void ignition();
     };
 
 }

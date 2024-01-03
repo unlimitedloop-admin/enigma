@@ -13,7 +13,7 @@
 //
 //      [enigma] r2-refined project
 //
-//      File name       : api_entry.cpp
+//      File name       : sequencer.h
 //
 //      Author          : u7
 //
@@ -22,20 +22,25 @@
 //
 // *************************************************************
 
-#include <Windows.h>
-#include "forms/boot/kernel.h"
+#ifndef _R2REFINED_APP_SEQUENCE_SEQUENCER_H_
+#define _R2REFINED_APP_SEQUENCE_SEQUENCER_H_
+
+#include "src/static/evaluations.h"
 
 
 
-/* Global variables. */
-// AppEngine class pointer.
-terminal::AppEngine* g_AppEngineInstance = nullptr;
+namespace app {
 
+    namespace sequence {
 
+        class ISequencer {
+        public:
+            virtual _static::ResultSet onExecute() = 0;
+            virtual ~ISequencer() {}
+        };
 
-INT APIENTRY wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _In_ LPTSTR lpszCmdLine, _In_ int nCmdShow) {
-    if (!boot::systems(lpszCmdLine)) {
-        return EXIT_FAILURE;
     }
-    return EXIT_SUCCESS;
+
 }
+
+#endif // !_R2REFINED_APP_SEQUENCE_SEQUENCER_H_

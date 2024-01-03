@@ -17,17 +17,18 @@
 //
 //      Author          : u7
 //
-//      Last update     : 2023/12/23
+//      Last update     : 2024/01/03
 //
 //
 // *************************************************************
 
 #include "kernel.h"
+#include <memory>
 #include <Windows.h>
 #include <VersionHelpers.h>
 #include "src/forms/terminal/app_engine.h"
-#include "src/forms/config/env_manager.h"
 #include "src/static/evaluations.h"
+#include "src/static/universal/global_object.h"
 
 
 
@@ -39,6 +40,7 @@ namespace boot {
 
     bool sysInit(LPTSTR cmdline) {
         if (!lstrcmp(cmdline, L"debug")) {
+            _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
             MessageBox(NULL, L"Start in debug mode.", L"Message", MB_ICONINFORMATION | MB_OK);
         }
         auto checker = 0;
@@ -84,27 +86,24 @@ namespace boot {
             mode = _static::RunMode::DEBUG_MODE;
         }
         
-        terminal::AppEngine engine;
-        EngineFinalizer finalizer(engine);
-
-        if (engine.initialize()) {
-            engine.eventLoop();
-        }
-        return false;
+        g_AppEngineInstance = new terminal::AppEngine(mode);
+        EngineFinalizer finalizer(*g_AppEngineInstance);
+        return g_AppEngineInstance->initialize() ? g_AppEngineInstance->eventLoop() : false;
     }
 
 
     bool sysFin(bool isResults) {
         // Here you can add system actions to be executed on exit.
+        if (nullptr != g_AppEngineInstance) {
+            delete g_AppEngineInstance;
+            g_AppEngineInstance = nullptr;
+        }
         return isResults;
     }
 
 
     bool systems(LPTSTR cmdline) {
-        if (sysInit(cmdline)) {
-            return sysFin(sysMain(cmdline));
-        }
-        return sysFin(false);
+        return sysInit(cmdline) ? sysFin(sysMain(cmdline)) : sysFin(false);
     }
 
 }

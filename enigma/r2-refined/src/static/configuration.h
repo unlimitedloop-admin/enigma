@@ -13,7 +13,7 @@
 //
 //      [enigma] r2-refined project
 //
-//      File name       : api_entry.cpp
+//      File name       : configuration.h
 //
 //      Author          : u7
 //
@@ -22,20 +22,13 @@
 //
 // *************************************************************
 
-#include <Windows.h>
-#include "forms/boot/kernel.h"
+#ifndef _R2REFINED_STATIC_CONFIGURATION_H_
+#define _R2REFINED_STATIC_CONFIGURATION_H_
 
+namespace _static {
 
+    constexpr size_t R2R_G_JOYPADKEY = 16ULL;
 
-/* Global variables. */
-// AppEngine class pointer.
-terminal::AppEngine* g_AppEngineInstance = nullptr;
-
-
-
-INT APIENTRY wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _In_ LPTSTR lpszCmdLine, _In_ int nCmdShow) {
-    if (!boot::systems(lpszCmdLine)) {
-        return EXIT_FAILURE;
-    }
-    return EXIT_SUCCESS;
 }
+
+#endif // !_R2REFINED_STATIC_CONFIGURATION_H_
