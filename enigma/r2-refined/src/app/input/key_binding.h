@@ -17,7 +17,7 @@
 //
 //      Author          : u7
 //
-//      Last update     : 2024/01/03
+//      Last update     : 2024/01/06
 //
 //
 // *************************************************************
@@ -41,6 +41,12 @@ namespace app {
 
         class XInputModulation final {
         public:
+            XInputModulation() {
+                keys = {};
+                hatswitchEnabled = false;
+                xinputEnabled = false;
+            }
+
             std::array<uint16_t, R2R_G_JOYPADKEY> keys;     // Controller input keys.
             bool hatswitchEnabled;                          // The hat switch is a cross button.
             bool xinputEnabled;                             // Enable XInput controller.

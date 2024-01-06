@@ -17,14 +17,16 @@
 //
 //      Author          : u7
 //
-//      Last update     : 2024/01/03
+//      Last update     : 2024/01/06
 //
 //
 // *************************************************************
 
 #include "main_sequence.h"
+#include "src/app/components/component.h"
+#include "src/app/components/A01/launch_component.h"
 #include "src/app/input/joystick.h"
-#include "src/app/input/jpbtn.h"
+#include "src/static/evaluations.h"
 
 
 
@@ -32,12 +34,32 @@ namespace app {
 
     namespace sequence {
 
+        MainSequence::MainSequence() {
+            _joyStick = std::make_shared<input::Joystick>();
+            _component = new components::A01::LaunchComponent();
+        }
+
+
+        MainSequence::~MainSequence() {
+            if (_component) {
+                delete _component;
+                _component = nullptr;
+            }
+        }
+
+
         _static::ResultSet MainSequence::onExecute() {
             if (!_joyStick->updateJoystickState()) return _static::ResultSet::PROC_FAILED;
-            if (_joyStick->getPressJoyButton(input::JPBTN::START)) {
-                return _static::ResultSet::PROC_QUIT;
+            return _component ? _component->doExecuteComponents(this) : _static::ResultSet::PROC_QUIT;
+        }
+
+
+        bool MainSequence::changeComponents(components::IComponent* component) {
+            if (_component) {
+                delete _component;
+                _component = component;
             }
-            return _static::ResultSet::PROC_SUCCEED;
+            return nullptr != _component;
         }
 
     }

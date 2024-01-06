@@ -1,0 +1,58 @@
+// *************************************************************
+//
+//
+//      Copyright (c) 2024 UNLIMITED LOOP ROOT-ONE
+//
+//
+//      This software(and source code) is completely Unlicense.
+//      see "LICENSE".
+//
+//
+// *************************************************************
+//
+//
+//      [enigma] r2-refined project
+//
+//      File name       : resource_filecheck.h
+//
+//      Author          : u7
+//
+//      Last update     : 2024/01/06
+//
+//
+// *************************************************************
+
+#ifndef _R2REFINED_APP_COMPONENTS_A01_STATE_RESOURCEFILECHECK_H_
+#define _R2REFINED_APP_COMPONENTS_A01_STATE_RESOURCEFILECHECK_H_
+
+#include "src/app/components/phase.h"
+#include "src/app/components/phase_context.h"
+
+
+
+namespace app {
+
+    namespace components {
+
+        namespace A01 {
+
+            namespace state {
+
+                class ResourceFilecheckPhase : public IPhase {
+                public:
+                    ResourceFilecheckPhase() {}
+                    ResourceFilecheckPhase(const ResourceFilecheckPhase&) = delete;
+                    ~ResourceFilecheckPhase() {}
+
+                    bool execute(IPhaseContext* object) override;
+                };
+
+            }
+
+        }
+
+    }
+
+}
+
+#endif // !_R2REFINED_APP_COMPONENTS_A01_STATE_RESOURCEFILECHECK_H_

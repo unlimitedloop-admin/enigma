@@ -17,17 +17,18 @@
 //
 //      Author          : u7
 //
-//      Last update     : 2024/01/03
+//      Last update     : 2024/01/06
 //
 //
 // *************************************************************
 
-#include "app_engine.h"
-#include <string>
 #include <DxLib.h>
+#include <string>
+#include "app_engine.h"
 #include "resource.h"
 #include "src/app/sequence/develop_sequence.h"
 #include "src/app/sequence/main_sequence.h"
+#include "src/app/sequence/test_sequence.h"
 #include "src/exceptions/error_handler.h"
 #include "src/forms/config/env_manager.h"
 #include "src/static/evaluations.h"
@@ -130,20 +131,20 @@ namespace terminal {
         using act = _static::Activator;
         if (nullptr == _sequence && act::CHANGE_MAINPROC == _activator) {
             _sequence = new app::sequence::MainSequence();
-            DxLib::SetBackgroundColor(255, 255, 255);
+            DxLib::SetBackgroundColor(0xFF, 0xFF, 0xFF);
         }
         else if (nullptr == _sequence && act::CHANGE_DEVELOPPROC == _activator) {
             _sequence = new app::sequence::DevelopSequence();
-            DxLib::SetBackgroundColor(0x64, 0x50, 0x41);
+            DxLib::SetBackgroundColor(0x80, 0x80, 0x80);
         }
         else if (nullptr == _sequence && act::CHANGE_DRIVER == _activator) {
-            // TODO : Test only sequence instance.
-            // _sequence = new app::sequence::TestSequence();
+             _sequence = new app::sequence::TestSequence();
+            DxLib::SetBackgroundColor(0x64, 0x50, 0x41);
         }
         else if (nullptr != _sequence && act::NOT_ACTIVATION == _activator) {
             delete _sequence;
             _sequence = nullptr;
-            DxLib::SetBackgroundColor(0, 0, 0);
+            DxLib::SetBackgroundColor(0x00, 0x00, 0x00);
         }
     }
 

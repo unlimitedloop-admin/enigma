@@ -13,7 +13,7 @@
 //
 //      [enigma] r2-refined project
 //
-//      File name       : develop_sequence.h
+//      File name       : test_sequence.h
 //
 //      Author          : u7
 //
@@ -22,8 +22,8 @@
 //
 // *************************************************************
 
-#ifndef _R2REFINED_APP_SEQUENCE_DEVELOPSEQUENCE_H_
-#define _R2REFINED_APP_SEQUENCE_DEVELOPSEQUENCE_H_
+#ifndef _R2REFINED_APP_SEQUENCE_TESTSEQUENCE_H_
+#define _R2REFINED_APP_SEQUENCE_TESTSEQUENCE_H_
 
 #include <memory>
 #include "sequencer.h"
@@ -38,12 +38,12 @@ namespace app {
 
     namespace sequence {
 
-        class DevelopSequence final : public ISequencer, public components::IComponentContext {
+        class TestSequence final : public ISequencer, public components::IComponentContext {
         public:
-            DevelopSequence();
-            DevelopSequence(const DevelopSequence&) = delete;
-            DevelopSequence& operator=(const DevelopSequence&) = delete;
-            ~DevelopSequence();
+            TestSequence();
+            TestSequence(const TestSequence&) = delete;
+            TestSequence& operator=(const TestSequence&) = delete;
+            ~TestSequence();
 
             _static::ResultSet onExecute() override;
             bool changeComponents(components::IComponent* component) override;
@@ -57,4 +57,4 @@ namespace app {
 
 }
 
-#endif // !_R2REFINED_APP_SEQUENCE_DEVELOPSEQUENCE_H_
+#endif // !_R2REFINED_APP_SEQUENCE_TESTSEQUENCE_H_

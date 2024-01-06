@@ -13,7 +13,7 @@
 //
 //      [enigma] r2-refined project
 //
-//      File name       : develop_sequence.cpp
+//      File name       : test_sequence.cpp
 //
 //      Author          : u7
 //
@@ -22,12 +22,11 @@
 //
 // *************************************************************
 
-#include <DxLib.h>
-#include <string>
-#include "develop_sequence.h"
+#include "test_sequence.h"
+#include "src/app/components/component.h"
+#include "src/app/components/X01/joypad_tester.h"
 #include "src/app/input/joystick.h"
-#include "src/app/input/jpbtn.h"
-#include "src/static/configuration.h"
+#include "src/static/evaluations.h"
 
 
 
@@ -35,13 +34,13 @@ namespace app {
 
     namespace sequence {
 
-        DevelopSequence::DevelopSequence() {
+        TestSequence::TestSequence() {
             _joyStick = std::make_shared<input::Joystick>();
-            _component = nullptr;
+            _component = new components::X01::JoypadTester(_joyStick);
         }
 
 
-        DevelopSequence::~DevelopSequence() {
+        TestSequence::~TestSequence() {
             if (_component) {
                 delete _component;
                 _component = nullptr;
@@ -49,13 +48,13 @@ namespace app {
         }
 
 
-        _static::ResultSet DevelopSequence::onExecute() {
+        _static::ResultSet TestSequence::onExecute() {
             if (!_joyStick->updateJoystickState()) return _static::ResultSet::PROC_FAILED;
-            return _static::ResultSet::PROC_SUCCEED;
+            return _component ? _component->doExecuteComponents(this) : _static::ResultSet::PROC_QUIT;
         }
 
 
-        bool DevelopSequence::changeComponents(components::IComponent* component) {
+        bool TestSequence::changeComponents(components::IComponent* component) {
             if (_component) {
                 delete _component;
                 _component = component;

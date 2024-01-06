@@ -17,7 +17,7 @@
 //
 //      Author          : u7
 //
-//      Last update     : 2024/01/03
+//      Last update     : 2024/01/06
 //
 //
 // *************************************************************
@@ -27,9 +27,9 @@
 
 #include <array>
 #include <cstdint>
+#include <DxLib.h>
 #include <memory>
 #include <numeric>
-#include <DxLib.h>
 #include "jpbtn.h"
 #include "key_binding.h"
 #include "src/forms/inputkey/keyboards_in.h"
@@ -72,6 +72,12 @@ namespace app {
             }
             int64_t getReleaseJoyButton(const JPBTN num) const {
                 return _joyButtonReleased.button[static_cast<int64_t>(num)];
+            }
+            int64_t getHoldKey(size_t keynumber) const {
+                return _keyboards->getHoldKeyValue(keynumber);
+            }
+            int64_t getFreeKey(size_t keynumber) const {
+                return _keyboards->getFreeKeyValue(keynumber);
             }
             bool isPressingAnyButton() const {
                 return 0 != std::accumulate(_joyButton.button.begin(), _joyButton.button.end(), 0LL);

@@ -17,7 +17,7 @@
 //
 //      Author          : u7
 //
-//      Last update     : 2024/01/03
+//      Last update     : 2024/01/06
 //
 //
 // *************************************************************
@@ -44,7 +44,7 @@ namespace app {
             DxLib::XINPUT_STATE xinput{};
             if (_keyBinding.isXInputEnabled()) {
                 if (0 != GetJoypadXInputState(DX_INPUT_KEY_PAD1, &xinput)) return false;
-                for (int i = 0; i < _joyButton.button.size(); ++i) {
+                for (size_t i = 0; i < _joyButton.button.size(); ++i) {
                     if (xinput.Buttons[xinput_btn[i]]) {
                         ++_joyButton.button[i];
                         _joyButtonReleased.button[i] = 0;
