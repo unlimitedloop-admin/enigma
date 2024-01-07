@@ -17,7 +17,7 @@
 //
 //      Author          : u7
 //
-//      Last update     : 2024/01/03
+//      Last update     : 2024/01/07
 //
 //
 // *************************************************************
@@ -35,7 +35,7 @@ namespace terminal {
 
     class AppEngine final {
     public:
-        AppEngine(_static::RunMode mode) : _mode(mode), _sequence(nullptr), _activator(_static::Activator::DISABLED) {}
+        AppEngine(_static::RunMode mode) : _mode(mode), _sequence(nullptr), _activator(_static::Activator::DISABLED), _screenHandle(0) {}
         AppEngine(const AppEngine&) = delete;
         AppEngine& operator=(const AppEngine&) = delete;
         ~AppEngine() {}
@@ -52,6 +52,7 @@ namespace terminal {
         _static::RunMode _mode;
         _static::Activator _activator;
         app::sequence::ISequencer* _sequence;
+        int _screenHandle;
 
         void setAppsActiveFlag(bool, bool = false);
         void ignition();

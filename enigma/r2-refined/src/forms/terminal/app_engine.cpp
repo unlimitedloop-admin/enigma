@@ -51,8 +51,8 @@ namespace terminal {
             DXLIBFUNC_AGREE_OK != DxLib::SetOutApplicationLogValidFlag(FALSE) ||
             DXLIBFUNC_AGREE_OK != DxLib::SetAlwaysRunFlag(FALSE) ||
             DX_CHANGESCREEN_OK != DxLib::ChangeWindowMode(TRUE) ||
-            DX_CHANGESCREEN_OK != DxLib::SetGraphMode(256, 240, 16) ||
-            DXLIBFUNC_AGREE_OK != DxLib::SetWindowSizeExtendRate(2.0) ||
+            DX_CHANGESCREEN_OK != DxLib::SetGraphMode(512, 480, 16) ||
+            DXLIBFUNC_AGREE_OK != DxLib::SetWindowSizeExtendRate(1.0) ||
             DXLIBFUNC_AGREE_OK != DxLib::SetWindowPosition(32, 32) ||
             DXLIBFUNC_AGREE_OK != DxLib::LoadMenuResource(IDR_MENU1) ||
             DXLIBFUNC_AGREE_OK != DxLib::SetUseMenuFlag(TRUE)
@@ -76,6 +76,7 @@ namespace terminal {
             DxLib::SetUseKeyAccelFlag(TRUE);
             DxLib::AddKeyAccel_ID(ID_40001, KEY_INPUT_F1, FALSE, FALSE, FALSE);
             SetWindowLongPtr(HWnd, GWLP_WNDPROC, reinterpret_cast<LONG_PTR>(definitiveProc));
+            _screenHandle = DxLib::MakeScreen(256, 240, FALSE);
             return true;
         }
         return false;
@@ -84,7 +85,7 @@ namespace terminal {
 
     bool AppEngine::eventLoop() {
         return ErrorHandler::tryCatchWithLogging([=]() {
-            while (!DxLib::ProcessMessage() && !DxLib::ScreenFlip() && !DxLib::ClearDrawScreen()) {
+            while (!DxLib::ProcessMessage() && !SetDrawScreen(_screenHandle) && !DxLib::ClearDrawScreen()) {
                 // Begin the main program.
                 /*
                  * NOTE :
@@ -94,8 +95,11 @@ namespace terminal {
                  * The value of _sequence is set by the _activator key, and the process is controlled by the 'AppEngine::iginition' method.
                  */
                 ignition();
-                if (nullptr != _sequence && _static::ResultSet::PROC_SUCCEED != _sequence->onExecute()) {
+                if (_sequence && _static::ResultSet::PROC_SUCCEED != _sequence->onExecute()) {
                     setAppsActiveFlag(false);
+                }
+                if (DxLib::SetDrawScreen(DX_SCREEN_BACK) || DxLib::DrawExtendGraph(0, 0, 512, 480, _screenHandle, FALSE) || DxLib::ScreenFlip()) {
+                    break;
                 }
             }
         });
@@ -119,11 +123,9 @@ namespace terminal {
             if (config::EnvManager::getParameter(L"$TEST_DRIVER", &str) && L"1" == str) {
                 _activator = act::CHANGE_DRIVER;
             }
-            DxLib::SetDrawScreen(DX_SCREEN_BACK);
         }
         else {
             _activator = act::NOT_ACTIVATION;
-            DxLib::SetDrawScreen(DX_SCREEN_FRONT);
         }
     }
 
