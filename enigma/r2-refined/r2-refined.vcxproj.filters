@@ -24,6 +24,12 @@
     <ClCompile Include="src\app\components\A01\state\resource_filecheck.cpp" />
     <ClCompile Include="src\app\sequence\test_sequence.cpp" />
     <ClCompile Include="src\app\components\X01\joypad_tester.cpp" />
+    <ClCompile Include="src\app\components\F01\opening_scene.cpp" />
+    <ClCompile Include="src\app\raw\object_provisioner.cpp" />
+    <ClCompile Include="src\app\raw\object_dealer.cpp" />
+    <ClCompile Include="src\app\raw\bg\bg_loader.cpp" />
+    <ClCompile Include="src\app\components\F01\state\credit_logo.h" />
+    <ClCompile Include="src\app\components\F01\state\credit_logo.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\forms\boot\kernel.h" />
@@ -51,6 +57,16 @@
     <ClInclude Include="src\app\components\A01\state\resource_filecheck.h" />
     <ClInclude Include="src\app\sequence\test_sequence.h" />
     <ClInclude Include="src\app\components\X01\joypad_tester.h" />
+    <ClInclude Include="src\app\components\F01\opening_scene.h" />
+    <ClInclude Include="src\app\raw\object_dealer.h" />
+    <ClInclude Include="src\app\raw\object_provisioner.h" />
+    <ClInclude Include="src\app\raw\div_graph_param.h" />
+    <ClInclude Include="src\app\raw\bg\tiles.h" />
+    <ClInclude Include="src\app\raw\bg\craft.h" />
+    <ClInclude Include="src\app\raw\bg\tile_craft.h" />
+    <ClInclude Include="src\app\raw\loader.h" />
+    <ClInclude Include="src\app\raw\bg\bg_loader.h" />
+    <ClInclude Include="src\app\raw\bg\index_tiles.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="r2-refined.rc" />

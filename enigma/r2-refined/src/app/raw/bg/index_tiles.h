@@ -13,7 +13,7 @@
 //
 //      [enigma] r2-refined project
 //
-//      File name       : resource_filecheck.cpp
+//      File name       : index_tiles.h
 //
 //      Author          : u7
 //
@@ -22,29 +22,31 @@
 //
 // *************************************************************
 
-#include "resource_filecheck.h"
-#include "src/app/components/phase_context.h"
+#ifndef _R2REFINED_APP_RAW_BG_INDEXTILES_H_
+#define _R2REFINED_APP_RAW_BG_INDEXTILES_H_
+
+#include <string>
+#include "tiles.h"
 
 
 
 namespace app {
 
-    namespace components {
+    namespace raw {
 
-        namespace A01 {
+        namespace bg {
 
-            namespace state {
+            struct IndexedTiles {
+                std::wstring index;
+                ITiles* value;
 
-                bool ResourceFilecheckPhase::execute(IPhaseContext* object) {
-                    // TODO : Resource file check.
-                    object->setPhase(nullptr);
-                    return true;
-                }
-
-            }
+                IndexedTiles(std::wstring idx, ITiles* val) : index(idx), value(val) {}
+            };
 
         }
 
     }
 
 }
+
+#endif // !_R2REFINED_APP_RAW_BG_INDEXTILES_H_

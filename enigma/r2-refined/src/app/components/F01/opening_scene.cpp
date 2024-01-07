@@ -13,7 +13,7 @@
 //
 //      [enigma] r2-refined project
 //
-//      File name       : launch_component.cpp
+//      File name       : opening_scene.cpp
 //
 //      Author          : u7
 //
@@ -22,11 +22,12 @@
 //
 // *************************************************************
 
-#include "launch_component.h"
+#include <DxLib.h>
+#include <memory>
+#include "opening_scene.h"
 #include "src/app/components/component_context.h"
 #include "src/app/components/phase.h"
-#include "src/app/components/A01/state/resource_filecheck.h"
-#include "src/app/components/F01/opening_scene.h"
+#include "src/app/raw/object_provisioner.h"
 #include "src/static/evaluations.h"
 
 
@@ -35,33 +36,28 @@ namespace app {
 
     namespace components {
 
-        namespace A01 {
+        namespace F01 {
 
-            LaunchComponent::LaunchComponent() {
-                _phase = new state::ResourceFilecheckPhase();
+            OpeningScene::OpeningScene() {
+                _objDealer = std::make_shared<raw::ObjectDealer>();
+                _phase = new raw::ObjectProvisioner(_objDealer);
+                _phase->execute(this);
+                DxLib::SetBackgroundColor(0x00, 0x00, 0x00);
             }
 
 
-            LaunchComponent::~LaunchComponent() {
-                if (_phase) {
-                    delete _phase;
-                    _phase = nullptr;
-                }
-            }
-
-
-            _static::ResultSet LaunchComponent::doExecuteComponents(IComponentContext* object) {
-                if (_phase && !_phase->execute(this)) {     // Running process.
+            _static::ResultSet OpeningScene::doExecuteComponents(IComponentContext* object) {
+                if (_phase && !_phase->execute(this)) {
                     return _static::ResultSet::PROC_FAILED;
                 }
                 if (!_phase) {
-                    object->changeComponents(new F01::OpeningScene());      // Next scene.
+                    object->changeComponents(nullptr);      // TODO : Next scene object for IComponent.
                 }
                 return _static::ResultSet::PROC_SUCCEED;
             }
 
 
-            bool LaunchComponent::setPhase(IPhase* phase) {
+            bool OpeningScene::setPhase(IPhase* phase) {
                 if (_phase) {
                     delete _phase;
                     _phase = phase;

@@ -13,7 +13,7 @@
 //
 //      [enigma] r2-refined project
 //
-//      File name       : resource_filecheck.cpp
+//      File name       : div_graph_param.h
 //
 //      Author          : u7
 //
@@ -22,29 +22,25 @@
 //
 // *************************************************************
 
-#include "resource_filecheck.h"
-#include "src/app/components/phase_context.h"
-
-
+#ifndef _R2REFINED_APP_RAW_DIVGRAPHPARAM_H_
+#define _R2REFINED_APP_RAW_DIVGRAPHPARAM_H_
 
 namespace app {
 
-    namespace components {
+    namespace raw {
 
-        namespace A01 {
+        class DivGraphParam {
+        public:
+            int allNum;
+            int xNum;
+            int yNum;
+            int xSize;
+            int ySize;
+        };
 
-            namespace state {
-
-                bool ResourceFilecheckPhase::execute(IPhaseContext* object) {
-                    // TODO : Resource file check.
-                    object->setPhase(nullptr);
-                    return true;
-                }
-
-            }
-
-        }
-
+        typedef DivGraphParam* LPDivGraphParam;
     }
 
 }
+
+#endif // !_R2REFINED_APP_RAW_DIVGRAPHPARAM_H_

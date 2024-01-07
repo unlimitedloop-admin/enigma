@@ -17,7 +17,7 @@
 //
 //      Author          : u7
 //
-//      Last update     : 2024/01/06
+//      Last update     : 2024/01/07
 //
 //
 // *************************************************************
@@ -51,7 +51,8 @@ namespace terminal {
             DXLIBFUNC_AGREE_OK != DxLib::SetOutApplicationLogValidFlag(FALSE) ||
             DXLIBFUNC_AGREE_OK != DxLib::SetAlwaysRunFlag(FALSE) ||
             DX_CHANGESCREEN_OK != DxLib::ChangeWindowMode(TRUE) ||
-            DX_CHANGESCREEN_OK != DxLib::SetGraphMode(512, 480, 16) ||
+            DX_CHANGESCREEN_OK != DxLib::SetGraphMode(256, 240, 16) ||
+            DXLIBFUNC_AGREE_OK != DxLib::SetWindowSizeExtendRate(2.0) ||
             DXLIBFUNC_AGREE_OK != DxLib::SetWindowPosition(32, 32) ||
             DXLIBFUNC_AGREE_OK != DxLib::LoadMenuResource(IDR_MENU1) ||
             DXLIBFUNC_AGREE_OK != DxLib::SetUseMenuFlag(TRUE)
@@ -129,19 +130,19 @@ namespace terminal {
 
     void AppEngine::ignition() {
         using act = _static::Activator;
-        if (nullptr == _sequence && act::CHANGE_MAINPROC == _activator) {
+        if (!_sequence && act::CHANGE_MAINPROC == _activator) {
             _sequence = new app::sequence::MainSequence();
             DxLib::SetBackgroundColor(0xFF, 0xFF, 0xFF);
         }
-        else if (nullptr == _sequence && act::CHANGE_DEVELOPPROC == _activator) {
+        else if (!_sequence && act::CHANGE_DEVELOPPROC == _activator) {
             _sequence = new app::sequence::DevelopSequence();
             DxLib::SetBackgroundColor(0x80, 0x80, 0x80);
         }
-        else if (nullptr == _sequence && act::CHANGE_DRIVER == _activator) {
-             _sequence = new app::sequence::TestSequence();
+        else if (!_sequence && act::CHANGE_DRIVER == _activator) {
+            _sequence = new app::sequence::TestSequence();
             DxLib::SetBackgroundColor(0x64, 0x50, 0x41);
         }
-        else if (nullptr != _sequence && act::NOT_ACTIVATION == _activator) {
+        else if (_sequence && act::NOT_ACTIVATION == _activator) {
             delete _sequence;
             _sequence = nullptr;
             DxLib::SetBackgroundColor(0x00, 0x00, 0x00);
